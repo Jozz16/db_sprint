@@ -1,8 +1,7 @@
 create database sprintfinal;
-create database sprintfinal;
 use sprintfinal;
 CREATE TABLE cliente (
-   rutcliente varchar(9) NOT NULL primary key,
+   rutcliente int NOT NULL primary key,
    nombres varchar(30)  ,
    apellidos varchar(30)  ,
    telefono varchar(20) ,
@@ -27,6 +26,13 @@ CREATE TABLE asesoria (
   motivo_asesoria varchar(100),
   cliente_rutcliente int,
   idprofesional int
+);
+CREATE TABLE profesional (
+	idprofesional int(100) not null primary key auto_increment,
+    rutprofesional int(100) NOT NULL  ,
+    tituloProf varchar(100)  ,
+    nombreproyecto varchar(50),
+    telefono int(20)
 );
 alter table asesoria add foreign key (cliente_rutcliente) references cliente (rutcliente);
 alter table asesoria add foreign key (idprofesional) references profesional (idprofesional);
@@ -61,16 +67,10 @@ CREATE TABLE administrativo (
     correoadmin varchar(100)  ,
     areaadmin varchar(50)
 );
-CREATE TABLE profesional (
-	idprofesional int(100) not null primary key auto_increment,
-    rutprofesional int(100) NOT NULL  ,
-    tituloProf varchar(100)  ,
-    nombreproyecto varchar(50),
-    telefono int(20)
-);
+
 alter table usuario add  foreign key (cliente_rutcliente) references cliente (rutcliente);
-alter table usuario add  foreign key (profresional_rut) references profesional (idprofesional);
-alter table usuario add  foreign key (Administrativo_rutadmin) references administrativo (idadmin);
+alter table usuario add  foreign key (profresional_id) references profesional (idprofesional);
+alter table usuario add  foreign key (Administrativo_id) references administrativo (idadmin);
 
 
 CREATE TABLE visita (
